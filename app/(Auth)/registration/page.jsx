@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
-
+import { API_BASE_URL } from '../utils/constants'
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -28,7 +28,7 @@ export default function RegisterPage() {
 
     console.log(data)
     try {
-      const response = await fetch('https://35.225.73.249/auth/registration', {
+      const response = await fetch(`${API_BASE_URL}/auth/registration`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

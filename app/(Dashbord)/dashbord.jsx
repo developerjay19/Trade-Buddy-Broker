@@ -25,7 +25,7 @@ export default function Dashboard() {
     setIsLoading(true)
     try {
       const token = Cookies.get("access_token")
-      const response = await fetch(`https://35.225.73.249/order/positions`, {
+      const response = await fetch(`${API_BASE_URL}/order/positions`, {
         method: 'GET',
         headers: {
           'accept': 'application/json',

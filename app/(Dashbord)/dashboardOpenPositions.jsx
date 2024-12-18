@@ -76,7 +76,7 @@ export default function OpenPositionsTable({
       };
       const token = Cookies.get("access_token");
       const response = await fetch(
-        `https://35.225.73.249/order/create_exit_all_order/`,
+        `${API_BASE_URL}/order/create_exit_all_order/`,
         {
           method: "POST",
           body: JSON.stringify(sendBody),
@@ -126,7 +126,7 @@ export default function OpenPositionsTable({
       };
       const token = Cookies.get("access_token");
       const response = await fetch(
-        `https://35.225.73.249/order/stoploss_order/`,
+        `${API_BASE_URL}/order/stoploss_order/`,
         {
           method: "POST",
           body: JSON.stringify(bodySend),
@@ -179,7 +179,7 @@ export default function OpenPositionsTable({
       };
       const token = Cookies.get("access_token");
       const response = await fetch(
-        `https://35.225.73.249/order/update_quantity_order/`,
+        `${API_BASE_URL}/order/update_quantity_order/`,
         {
           method: "POST",
           body: JSON.stringify(bodySend),
@@ -240,7 +240,7 @@ export default function OpenPositionsTable({
 
   const fetchPrice = async (selectedTrade) => {
     try {
-      const response = await fetch(`https://35.225.73.249/live_data/find?type_of_symbol=${selectedTrade?.stock_type}&symbol_id=${selectedTrade?.stock_symbol}`)
+      const response = await fetch(`${API_BASE_URL}/live_data/find?type_of_symbol=${selectedTrade?.stock_type}&symbol_id=${selectedTrade?.stock_symbol}`)
       const detailData = await response.json()
       setPrice(detailData?.ltp)
       return detailData?.ltp

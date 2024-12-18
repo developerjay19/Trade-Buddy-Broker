@@ -10,8 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useRouter } from 'next/navigation'
-
-const API_HOST = 'https://35.225.73.249'
+import { API_BASE_URL } from '../utils/constants'
 
 export default function TicketDashboardWithOTP() {
   const [isVerified, setIsVerified] = useState(false)
@@ -120,7 +119,7 @@ function TicketDashboard() {
     if (!selectedTicket) return
 
     try {
-      const response = await fetch(`${API_HOST}/admin/tickets/${selectedTicket.id}/reply`, {
+      const response = await fetch(`${API_BASE_URL}/admin/tickets/${selectedTicket.id}/reply`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: replyMessage })

@@ -26,7 +26,7 @@ export default function Component() {
       setLoading(true);
       const token  = Cookies.get("access_token")
       
-      const response = await fetch('https://35.225.73.249/transaction/get_all_transactions', {
+      const response = await fetch(`${API_BASE_URL}/transaction/get_all_transactions`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ export default function Component() {
       };
 
       const token  = Cookies.get("access_token")
-      const response = await fetch('https://35.225.73.249/transaction/create_transaction', {
+      const response = await fetch(`${API_BASE_URL}/transaction/create_transaction`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

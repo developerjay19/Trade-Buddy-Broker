@@ -35,7 +35,7 @@ export function LoginPageComponent() {
     setIsLoading(true)
 
     try {
-      const response = await fetch('https://35.225.73.249/auth/login', {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ export function LoginPageComponent() {
     setIsVerifying(true)
 
     try {
-      const response = await axios.get(`https://35.225.73.249/auth/verify_email/send_token/${verificationEmail}`)
+      const response = await axios.get(`${API_BASE_URL}/auth/verify_email/send_token/${verificationEmail}`)
       if (response.status === 200) {
         toast({
           title: "Email Verification Success",
@@ -110,7 +110,7 @@ export function LoginPageComponent() {
     setIsVerifying(true)
 
     try {
-      const response = await axios.post('https://35.225.73.249/auth/verify_email/verify_token', {
+      const response = await axios.post(`${API_BASE_URL}/auth/verify_email/verify_token`, {
         email: verificationEmail,
         otp: otp
       })

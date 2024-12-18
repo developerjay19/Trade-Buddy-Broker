@@ -18,7 +18,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-
+import { API_BASE_URL } from '../utils/constants'
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [email, setEmail] = useState("")
@@ -33,7 +33,7 @@ export default function LoginPage() {
     setIsLoading(true)
 
     try {
-      const response = await fetch('https://35.225.73.249/auth/login', {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export default function LoginPage() {
     setIsVerifying(true)
 
     try {
-      const response = await axios.get(`https://35.225.73.249/auth/verify_email/send_token/${verificationEmail}`)
+      const response = await axios.get(`${API_BASE_URL}/auth/verify_email/send_token/${verificationEmail}`)
       if (response.ok){
         router.push("/")
         toast({

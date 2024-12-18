@@ -28,7 +28,7 @@ export default function TradingTable({isLoading,trades}) {
 
   const handleExit = async (tradeId) => {
     try {
-      const response = await fetch(`https://35.225.73.249/order/create_exit_order/`, {
+      const response = await fetch(`${API_BASE_URL}/order/create_exit_order/`, {
         method: 'POST',
       })
       if (!response.ok) {

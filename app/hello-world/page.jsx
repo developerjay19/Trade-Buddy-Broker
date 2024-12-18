@@ -19,7 +19,7 @@ export default function ContactPage() {
     e.preventDefault()
     setIsLoading(true)
     try {
-      const response = await fetch('https://35.225.73.249/auth/help_message_send', {
+      const response = await fetch(`${API_BASE_URL}/auth/help_message_send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -106,12 +106,12 @@ export default function ContactPage() {
         <CardHeader className="bg-green-600 text-white">
           <CardTitle className="flex items-center"><Code className="mr-2" /> Our APIs</CardTitle>
           <CardDescription className="text-green-100">Explore our powerful APIs to integrate with our services.</CardDescription>
-          <a href={"https://35.225.73.249/docs"} className="text-white hover:underline mt-2 inline-block">Learn more</a>
+          <a href={"${API_BASE_URL}/docs"} className="text-white hover:underline mt-2 inline-block">Learn more</a>
         </CardHeader>
         <CardContent className="mt-4">
           <ul className="space-y-4">
             {[
-              { icon: User, title: "User Management API", description: "Manage user accounts and authentication.", link: "https://35.225.73.249/docs" },
+              { icon: User, title: "User Management API", description: "Manage user accounts and authentication.", link: "${API_BASE_URL}/docs" },
             ].map((api, index) => (
               <li key={index} className="bg-gray-100 p-4 rounded-lg">
                 <div className="flex items-center mb-2">

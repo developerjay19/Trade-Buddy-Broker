@@ -8,8 +8,7 @@ import { Input } from "@/components/ui/input"
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useRouter } from 'next/navigation'
-
-const API_HOST = 'https://35.225.73.249' // Store API host in a variable
+import { API_BASE_URL } from '../utils/constants'
 
 export default function AccountDashboardWithOTP() {
   const [isVerified, setIsVerified] = useState(false)
@@ -69,7 +68,7 @@ function AccountDashboard() {
   const fetchAccounts = async () => {
     setIsLoading(true)
     try {
-      const response = await fetch(`${API_HOST}/admin/accounts?page=${currentPage}&sortBy=${sortBy}&sortOrder=${sortOrder}&search=${searchTerm}`)
+      const response = await fetch(`${API_BASE_URL}/admin/accounts?page=${currentPage}&sortBy=${sortBy}&sortOrder=${sortOrder}&search=${searchTerm}`)
       if (!response.ok) throw new Error('Failed to fetch accounts')
       const data = await response.json()
       const processedAccounts = data.accounts.map((account) => ({

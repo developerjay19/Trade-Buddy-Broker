@@ -55,7 +55,7 @@ export default function StockSearchApp() {
   const fetchSearchResults = async () => {
     setIsLoading(true)
     try {
-      const response = await fetch(`https://35.225.73.249/live_data/search?q=${searchTerm}`)
+      const response = await fetch(`${API_BASE_URL}/live_data/search?q=${searchTerm}`)
       const data = await response.json() 
       setSearchResults(data)
       setShowDropdown(true)
@@ -72,7 +72,7 @@ export default function StockSearchApp() {
 
     try {
       const symbolId = stock.nse_scrip_code || stock.bse_scrip_code || stock.id;
-      const response = await fetch(`https://35.225.73.249/live_data/find?type_of_symbol=${stock.entity_type}&symbol_id=${symbolId}`)
+      const response = await fetch(`${API_BASE_URL}/live_data/find?type_of_symbol=${stock.entity_type}&symbol_id=${symbolId}`)
       const detailData = await response.json()
       setSelectedStock(detailData)
     } catch (error) {
@@ -98,7 +98,7 @@ export default function StockSearchApp() {
     
     try {
       const token = Cookies.get("access_token");
-      const response = await fetch('https://35.225.73.249/order/new_order/', {
+      const response = await fetch(`${API_BASE_URL}/order/new_order/`, {
         method: 'POST',
         body: JSON.stringify(bodydata),
         headers: {
