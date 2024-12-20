@@ -13,6 +13,7 @@ from app.Routes.admin import admin_route
 from app.Routes.orders import order_route
 from app.Routes.transaction import transaction_route
 from app.Routes.liveprice import live_price_route
+from app.Routes.tb_algo import algo_oprator
 async def start_system():
     print(text2art("TRADE BUDDY Start",font="small"))
     await init_db()
@@ -94,3 +95,4 @@ app.include_router(auth_rout,prefix="/auth",tags=["User Login and Registartion"]
 app.include_router(order_route,prefix="/order",tags=["Orders Management"])
 app.include_router(transaction_route,prefix="/transaction",tags=["Account Balance Transaction"])
 app.include_router(live_price_route,prefix="/live_data",tags=["Fetch Live Data"])
+app.include_router(algo_oprator,prefix="/algo_oprator",tags=["Orders management for Algo User"])
