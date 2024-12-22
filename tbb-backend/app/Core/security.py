@@ -108,8 +108,8 @@ async def get_account_from_token(request: dict = Depends(AccessTokenBearer()), d
     return account
 
 async def get_accounts_from_algo():
-    result = await db.execute(select(Account).where(Account.account_id == request["AccountId"]))
-    account = result.scalars().first()
+    results = await db.execute(select(Account).where(Account.account_id == request["AccountId"]))
+    account = results.scalars().all()
     if not account:
         raise TBException(
             message="No account found linked to this token.",

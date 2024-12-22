@@ -52,6 +52,7 @@ class Account(Base):
     email_verified = Column(Boolean, default=False)
     role = Column(String, default="User")
     is_activate = Column(Boolean, default=True)
+    algo_trading = Column(Boolean, default=False)
     description = Column(String,nullable=False,default="You are awsome")
     max_trad_per_day = Column(Integer, default=5)
     todays_margin = Column(Float, default=0.0)
