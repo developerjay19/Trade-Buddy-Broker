@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
-import { API_BASE_URL } from '../utils/constants'
+import { API_BASE_URL } from '@/lib/constants'
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false)

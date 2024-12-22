@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useRouter } from 'next/navigation'
-import { API_BASE_URL } from '../utils/constants'
+import { API_BASE_URL } from '@/lib/constants'
 
 export default function TicketDashboardWithOTP() {
   const [isVerified, setIsVerified] = useState(false)

@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useRouter } from 'next/navigation'
-import { API_BASE_URL } from '../utils/constants'
+import { API_BASE_URL } from '@/lib/constants'
 
 export default function AccountDashboardWithOTP() {
   const [isVerified, setIsVerified] = useState(false)
