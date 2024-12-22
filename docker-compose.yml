@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: tradebuddy
-    port:
+    ports:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
