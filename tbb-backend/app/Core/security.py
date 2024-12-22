@@ -107,13 +107,13 @@ async def get_account_from_token(request: dict = Depends(AccessTokenBearer()), d
         )
     return account
 
-async def get_accounts_from_algo():
-    results = await db.execute(select(Account).where(Account.account_id == request["AccountId"]))
+async def get_accounts_from_algo(db: AsyncSession = Depends(get_db)):
+    results = await db.execute(select(Account).where(Account.algo_trading==True))
     account = results.scalars().all()
     if not account:
         raise TBException(
-            message="No account found linked to this token.",
-            resolution="Verify the token and ensure the account exists.",
+            message="No account found with Algo Trading On",
+            resolution="",
             status_code=status.HTTP_404_NOT_FOUND
         )
     return account

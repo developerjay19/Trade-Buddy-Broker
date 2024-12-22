@@ -6,8 +6,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: tradebuddy
-    expose:
-      - 5432
+    port:
+      - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
     restart: always
@@ -16,12 +16,12 @@ services:
 
   backend:
     container_name: backend-container
-    image: developerjay19/tbb-backend:latest
+    image: tbb-backend:latest
     build:
       context: ./tbb-backend
       dockerfile: backend.Dockerfile
     environment:
-      - API_BASE_URL=https://35.239.105.236
+      - API_BASE_URL=https://api-tradebuddy.natkhatjay.com
     expose:
       - 8000
     depends_on:
@@ -36,12 +36,9 @@ services:
     image: nginx:latest
     container_name: nginx-container
     ports:
-      - "80:80"
-      - "443:443"
+      - "8000:8000"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf  # Nginx configuration
-      - ./nginx/selfsigned.crt:/etc/nginx/ssl/selfsigned.crt  # SSL certificate
-      - ./nginx/selfsigned.key:/etc/nginx/ssl/selfsigned.key  # SSL key
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - backend
     networks:

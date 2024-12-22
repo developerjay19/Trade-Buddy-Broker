@@ -34,6 +34,7 @@ async def create_new_orders(
     """
     try:
         for account in accounts:
+            print(account.account_id)
             await orders.create_order_services(db, account, request)
         return TBResponse(
             message="Created new orders for all accounts",
@@ -82,21 +83,36 @@ async def create_exit_order(
     - If fully exited, marks the position as completed and calculates the PnL.
     """
     try:
-        result = await db.execute(select(Account).where(Account.account_id == request.position_id))
-        account = result.scalars().first()
-
-        if not account:
-            raise TBException(
-                message="Account not found.",
-                resolution="Ensure the account exists before proceeding.",
-                status_code=status.HTTP_404_NOT_FOUND
-            )
-
-        await orders.create_exit_order_services(db, account, request)
+        await orders.create_exit_order_services(db, request)
         return TBResponse(
             message="Created exit orders for all accounts",
             payload={}
         )
+    except Exception as e:
+        await db.rollback()
+        raise TBException(
+            message=str(e),
+            resolution="An error occurred while creating exit orders. Try again.",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@algo_operator.get("/all_open_positions")
+async def get_all_open_positions(db: AsyncSession = Depends(get_db)):
+    try:
+        query = (
+            select(Position)
+            .options(joinedload(Position.orders))
+            .join(Account, Position.account_id == Account.account_id)  # Join Position with Account
+            .where(
+                Position.position_status == PositionStatus.PENDING,
+                Account.algo_trading == True  # Filter for algo_trading == True
+            )
+            .order_by(Position.created_date.desc())
+        )
+        result = await db.execute(query)
+        positions = result.unique().scalars().all()
+        return {"positions":positions}
     except Exception as e:
         await db.rollback()
         raise TBException(

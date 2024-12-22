@@ -1,6 +1,7 @@
 from app.Core.security import generate_unique_id
 from app.Models.model import Order, Position, Account,PositionStatus,OrderSide,OrderTypes,CreateBy 
 from app.Core.responseBytb import TBException,TBResponse
+from sqlalchemy import select, func, or_
 
 async def create_order_services(db,account,request):
         order_margin = request.quantity * request.price
@@ -60,6 +61,7 @@ async def create_order_services(db,account,request):
 
 
         msg = f"New position created for {position_id} with {request.quantity} Quantity"
+        print(msg)
         return True
 
 
@@ -119,13 +121,24 @@ async def create_stoploss_order_services(db,request):
 
         return True
 
-async def create_exit_order_services(db,account,request):
+async def create_exit_order_services(db,request):
+
         position = await db.scalar(select(Position).where(
                 Position.position_id == request.position_id,
                 Position.position_status == PositionStatus.PENDING
             ))
         if position is None:
             raise Exception("Position is not valid")
+
+        result = await db.execute(select(Account).where(Account.account_id == position.account_id))
+        account = result.scalars().first()
+        print(account.account_id)
+        if not account:
+            raise TBException(
+                message="Account not found.",
+                resolution="Ensure the account exists before proceeding.",
+                status_code=status.HTTP_404_NOT_FOUND
+            )
         
         sell_qty = (abs(position.buy_quantity-position.sell_quantity))
         sell_order = {
