@@ -9,6 +9,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Cookies from 'js-cookie'
+import { API_BASE_URL } from '@/lib/constants'
+
 export default function EnhancedPositionBook() {
   const [positions, setPositions] = useState([])
   const [loading, setLoading] = useState(true)

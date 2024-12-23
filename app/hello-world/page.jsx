@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Mail, User, Send, Code } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+import { API_BASE_URL } from '@/lib/constants' 
 
 export default function ContactPage() {
   const [email, setEmail] = useState("")

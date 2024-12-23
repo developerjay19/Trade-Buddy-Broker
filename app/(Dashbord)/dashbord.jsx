@@ -6,7 +6,7 @@ import DashboardCount from "./dashboardCount"
 import OpenPositionsTable from "./dashboardOpenPositions"
 import ClosePositionsTable from "./dashboardClosePositions"
 import Cookies from 'js-cookie'
-
+import { API_BASE_URL } from '@/lib/constants'
 export default function Dashboard() {
   const { toast } = useToast()
   const [openTrades, setOpenTrades] = useState([])

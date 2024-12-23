@@ -30,6 +30,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Cookies from "js-cookie";
+import { API_BASE_URL } from '@/lib/constants'
 
 export default function OpenPositionsTable({
   isLoading,

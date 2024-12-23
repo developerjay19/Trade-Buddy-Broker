@@ -9,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { useToast } from "@/hooks/use-toast"
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
-
+import { API_BASE_URL } from '@/lib/constants'
 
 export default function StockSearchApp() {
   const [searchTerm, setSearchTerm] = useState('')
