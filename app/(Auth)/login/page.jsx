@@ -47,8 +47,8 @@ export default function LoginPage() {
     
       if (response.ok) {
         const data = await response.json();
-        await Cookies.set("access_token", data.payload.access_token);
-        await Cookies.set("full_name", data.payload.full_name);
+        Cookies.set("access_token", data.payload.access_token);
+        Cookies.set("full_name", data.payload.full_name);
         toast({
           title: data?.message,
           description: "Successfully Logged In",

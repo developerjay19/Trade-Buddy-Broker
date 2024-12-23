@@ -11,6 +11,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
 import Cookies from "js-cookie";
+import { API_BASE_URL } from '@/lib/constants'
 
 export default function Component() {
   const [transactions, setTransactions] = useState([]);
