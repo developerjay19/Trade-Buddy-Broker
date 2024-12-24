@@ -34,11 +34,19 @@ async def create_new_orders(
     """
     try:
         for account in accounts:
-            print(account.account_id)
-            await orders.create_order_services(db, account, request)
+            query = (select(Position).where(
+                        Position.position_status == PositionStatus.PENDING,
+                        Position.stock_symbol == request.stock_symbol,
+                        Account.algo_trading == True)
+                    )
+            result = await db.execute(query)
+            positions = result.scalars().first()
+            if not positions:
+                await orders.create_order_services(db, account, request)
+            print("Position Allredy Exist",positions.positions_id)
         return TBResponse(
             message="Created new orders for all accounts",
-            payload={}
+            payload={"accounts":[i.account_id for i in accounts]}
         )
     except Exception as e:
         await db.rollback()
